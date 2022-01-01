@@ -1,7 +1,7 @@
 import CreatePostRequestDTO from "App/DTO/Post/CreatePostRequestDTO";
 import CreatePostResponseDTO from "App/DTO/Post/CreatePostResponseDTO";
 import IPost from "App/DTO/Post/IPost";
-import PostRepository from "App/Repository/UserRespository";
+import PostRepository from "App/Repository/PostRespository";
 import IPostService from "./IPostService";
 
 class PostService implements IPostService {
