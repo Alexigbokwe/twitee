@@ -2,6 +2,7 @@ import ServiceProvider from "Elucidate/Support/ServiceProvider";
 import Authenticator from "Elucidate/Auth/Authenticator";
 import DOCUMENTATION from "Elucidate/Documentation/DocumentationServiceProvider";
 import routeDocumentation from "Resources/RouteDocumentation";
+import PostService from "App/Service/PostService";
 
 class AppServiceProvicer extends ServiceProvider {
   /**
@@ -10,6 +11,7 @@ class AppServiceProvicer extends ServiceProvider {
    */
   public register() {
     this.app.singleton("Authenticator", Authenticator, "class");
+    this.app.singleton("PostService", PostService, "class");
   }
 
   /**

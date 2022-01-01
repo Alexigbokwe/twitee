@@ -32,13 +32,13 @@ class PostService implements IPostService {
     }
   }
 
-  async likePost(post_id: number): Promise<number> {
+  async likePost(post_id: number): Promise<{ post_id: number; likes: number }> {
     try {
       return await this.doesPostExist(post_id)
         .then(async () => {
           let currentLikeCount = <IPost>await new PostRepository().findById(post_id);
-          const post = <IPost>await new PostRepository().updateOne(post_id, { likes: currentLikeCount.likes + 1 });
-          return Promise.resolve(post.likes);
+          const post = await new PostRepository().updateOne(post_id, { likes: currentLikeCount.likes + 1 });
+          return Promise.resolve({ likes: post["likes"], post_id: post["id"] });
         })
         .catch(() => {
           return Promise.reject("Post does not exist");

@@ -1,10 +1,12 @@
+import { postType } from "App/Http/Requests/PostValidation";
+
 class CreatePostRequestDTO {
   private posted_by: number;
   private post_content: string;
 
-  constructor(data: CreatePostRequestDTO) {
-    this.posted_by = data.posted_by;
-    this.post_content = data.post_content;
+  constructor(data: postType) {
+    this.posted_by = data.post_author;
+    this.post_content = data.post;
   }
 
   /**
