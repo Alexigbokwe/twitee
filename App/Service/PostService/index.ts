@@ -65,6 +65,10 @@ class PostService implements IPostService {
     try {
       return await this.doesPostExist(post_id)
         .then(async () => {
+          const post = <IPost>await new PostRepository().findById(post_id);
+          if (post.posted_by != author_id) {
+            return Promise.reject("Sorry, you don't permission to delete this post");
+          }
           await new PostRepository().deleteWhere({ id: post_id, posted_by: author_id });
           return Promise.resolve("Post Successfully removed from system");
         })
