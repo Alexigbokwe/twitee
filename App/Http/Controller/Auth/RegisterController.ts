@@ -5,6 +5,7 @@ import Authenticator from "Elucidate/Auth/Authenticator";
 import CreateUserRequestDTO from "App/DTO/User/CreateUserRequestDTO";
 import CreateUserResponseDTO from "App/DTO/User/CreateUserResponseDTO";
 import RegisterValidation from "App/Http/Requests/RegisterValidation";
+import OnboardingMail from "App/Jobs/OnboardingMail_job";
 
 class RegisterController {
   protected Auth: Authenticator;
@@ -48,7 +49,9 @@ class RegisterController {
       .then(async (user: any) => {
         let token = await this.Auth.generateToken(user);
         user["token"] = token;
-        return HttpResponse.OK(res, { message: "User successfully registered", status: true, data: new CreateUserResponseDTO(user) });
+        const responsData = new CreateUserResponseDTO(user);
+        new OnboardingMail().dispatch(this.welcomeOnBoardmailDetails(responsData));
+        return HttpResponse.OK(res, { message: "User successfully registered", status: true, data: responsData });
       })
       .catch((err: { msg: any; payload: any }) => {
         return HttpResponse.UNAUTHORIZED(res, {
@@ -58,6 +61,17 @@ class RegisterController {
         });
       });
   };
+
+  private welcomeOnBoardmailDetails(userData: CreateUserResponseDTO) {
+    const sender_name = "Twitee";
+    const client_name = userData.username;
+    const to = userData.email;
+    const template = "WelcomeOnBoard";
+    const body = "";
+    const from = "admin@Twitee.com";
+    const subject = "Welcome On Board";
+    return { sender_name, client_name, to, template, body, from, subject };
+  }
 }
 
 export default RegisterController;
