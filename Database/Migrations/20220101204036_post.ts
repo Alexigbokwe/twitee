@@ -5,14 +5,13 @@
  */
 import { Migration } from "Elucidate/Database/Model";
 
-let tableName = "users";
-
+let tableName = "posts";
 exports.up = function (migration: Migration) {
   return migration.schema.createTable(tableName, (table) => {
     table.increments("id").primary();
-    table.string("username").notNullable();
-    table.string("email").unique().notNullable();
-    table.string("password").notNullable();
+    table.integer("posted_by").unsigned().references("id").inTable("users");
+    table.text("post_content").notNullable();
+    table.integer("likes").defaultTo(0);
     table.timestamps(true, true);
   });
 };
