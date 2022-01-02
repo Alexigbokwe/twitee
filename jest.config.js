@@ -1,4 +1,5 @@
 module.exports = {
+  testTimeout: 20000,
   moduleNameMapper: {
     "^App/(.*)$": "<rootDir>/App/$1",
     "^Config/(.*)$": "<rootDir>/Config/$1",
