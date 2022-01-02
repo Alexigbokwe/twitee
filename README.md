@@ -37,23 +37,30 @@ ExpressWebJs is designed for building professional web applications.
 - Task Scheduling
 - Multi-tenancy
 
-## Follow us on twitter @expresswebjs
+[Join our Discord community](https://discord.com/invite/vrPGZCgJuj)
 
-## Join ExpressWebJs Community on [Discord](https://discord.com/invite/vrPGZCgJuj) to chat with other engineers using using ExpressWebJs
+# TWITEE Backend Service
 
-Our Github discussion page is available for questions and discussions
+TWITEE is a mini and substandard runoff of Twitter. Users register and login and can put up
+anything that crosses their mind. The whole world can view their twits and comment on their
+twits /and like them.
 
-[https://github.com/Alexigbokwe/ExpressWebJs/discussions](https://github.com/Alexigbokwe/ExpressWebJs/discussions)
+## Project setup:
 
-# Contributing Guide
+- Clone project
+- Run npm install to install node packages
+- Create .env file by copying example.env file
+- Setup your database and connect to app in your .env file
+- Run 'npm run dev' to start app in development mode
+- Link to api documentation can be found on appBaseURI/documentationView Example http://127.0.0.1:5100/api/documentationView or http://127.0.0.1:5100/api/documentationJson for Json view.
+- use <code>npm test</code> for test. Example <code>npm test -- Login</code> to run login test.
 
-Hi! I'm really excited that you are interested in contributing to ExpressWebjs. Before submitting your contribution, please make sure to take a moment and read through our contribution guidelines:
+## ERD Diagram
 
-- [Contribution Guildline](https://github.com/Alexigbokwe/expresswebTS-Version/blob/master/.github/CONTRIBUTION.md)
+<img src=
+"https://drive.google.com/uc?export=view&id=1RFYxeX8rH-QQGZ3nP-eI-wk5gEwrgAPP" width="800">
 
-## Security Vulnerabilities
-
-If you discover any security vulnerability within ExpressWebJs, please send an e-mail to Chukwuemeka Igbokwe via chukwuemekaigbokwe80@gmail.com. All security vulnerabilities will be promptly addressed.
+### For more details on ExpressWebJs Framework, kindly visit [ExpressWebjs](https://expresswebjs.com/) Documentation guide.
 
 ## License
 
