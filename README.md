@@ -69,6 +69,8 @@ twits /and like them.
 
 - Setup your mysql database and connect to app in your .env file
 - Run 'npm run dev' to start app in development mode
+- Install ts-node using <code>npm i -g ts-node</code>
+- open another terminal and run your migration using this command <code>ts-node maker run-sql-migration</code>
 - Link to api documentation can be found on appBaseURI/documentationView Example http://127.0.0.1:5100/api/documentationView or http://127.0.0.1:5100/api/documentationJson for Json view.
 - use <code>npm test</code> for test. Example <code>npm test -- Login</code> to run login test.
 
