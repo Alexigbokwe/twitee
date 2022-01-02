@@ -132,7 +132,7 @@ class PostController {
       return await this.postService
         .deletePost(Number(validate.data["post_id"]), req.user.id)
         .then((deleteMessage) => {
-          return HttpResponse.OK(res, { message: deleteMessage, data: "", status: true });
+          return HttpResponse.OK(res, { message: deleteMessage, data: deleteMessage, status: true });
         })
         .catch((error) => {
           return HttpResponse.EXPECTATION_FAILED(res, { data: error, status: false });
