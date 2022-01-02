@@ -7,6 +7,17 @@ class Comment extends Model implements IComment {
   comment_content!: string;
   // Table name
   static tableName = "comment";
+
+  static relationMappings() {
+    return {
+      author: this.belongsTo("App/Model/User_model", {
+        foreign_key: "commented_by",
+        filter: (query) => {
+          query.select("id", "username");
+        },
+      }),
+    };
+  }
 }
 
 export default Comment;
