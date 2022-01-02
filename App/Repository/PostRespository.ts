@@ -17,7 +17,7 @@ class PostRepository extends SQLPD_repository {
 
   async findByIdWithAuthor(post_id: number): Promise<object> {
     try {
-      let post = await Post.query().findById(post_id).withGraphFetched("author").withGraphFetched("comment");
+      let post = await Post.query().findById(post_id).withGraphFetched("author").withGraphFetched("comment.[author]");
       return Promise.resolve(post);
     } catch (error) {
       return Promise.reject(error);
