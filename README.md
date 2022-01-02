@@ -49,8 +49,25 @@ twits /and like them.
 
 - Clone project
 - Run npm install to install node packages
-- Create .env file by copying example.env file
-- Setup your database and connect to app in your .env file
+- Create .env file by copying example.env file. Once that is done, update the following in .env file
+  </br>For database config:</br>
+  <code>
+  DB_CONNECTION=mysql</br>
+  DB_HOST=localhost</br>
+  DB_PORT=3306</br>
+  DB_USER=</br>
+  DB_PASSWORD=</br>
+  DB_DATABASE=database_name
+  </code>
+  </br>For mailing config:</br>
+  <code>
+  MAIL_HOST=</br>
+  MAIL_PORT=</br>
+  MAIL_AUTH_USER=</br>
+  MAIL_AUTH_PASSWORD=</br>
+  </code>
+
+- Setup your mysql database and connect to app in your .env file
 - Run 'npm run dev' to start app in development mode
 - Link to api documentation can be found on appBaseURI/documentationView Example http://127.0.0.1:5100/api/documentationView or http://127.0.0.1:5100/api/documentationJson for Json view.
 - use <code>npm test</code> for test. Example <code>npm test -- Login</code> to run login test.
