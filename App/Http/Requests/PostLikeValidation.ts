@@ -10,7 +10,8 @@ class PostLikeValidation extends FormRequest {
    */
   async validate<T>(data: T) {
     return await FormRequest.make<T>(data, {
-      //Validation rules
+      post_id: "required|numeric",
+      author: "required|numeric",
     });
   }
 }

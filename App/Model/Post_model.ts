@@ -11,6 +11,7 @@ class Post extends Model implements IPost {
 
   static relationMappings() {
     return {
+      likes: this.hasMany("App/Model/PostLike_model", { owner_key: "id", foreign_key: "post_id" }),
       comment: this.hasMany("App/Model/Comment_model", { owner_key: "id", foreign_key: "post_id" }),
       author: this.belongsTo("App/Model/User_model", {
         foreign_key: "posted_by",

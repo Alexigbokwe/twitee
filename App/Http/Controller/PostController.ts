@@ -1,16 +1,21 @@
 "use strict";
 import CreatePostRequestDTO from "App/DTO/Post/CreatePostRequestDTO";
+import CreatePostLikeRequestDTO from "App/DTO/PostLike/CreatePostLikeRequestDTO";
 import CreateUserResponseDTO from "App/DTO/User/CreateUserResponseDTO";
+import IPostLikeService from "App/Service/PostLikeService/IPostLikeService";
 import IPostService from "App/Service/PostService/IPostService";
 import { Request, Response, NextFunction } from "Elucidate/HttpContext";
 import HttpResponse from "Elucidate/HttpContext/ResponseType";
+import { postLikeType, postLikeValidation } from "../Requests/PostLikeValidation";
 import { postValidation, postType } from "../Requests/PostValidation";
 
 class PostController {
   protected postService: IPostService;
+  protected postLikeService: IPostLikeService;
 
-  constructor(PostService: IPostService) {
+  constructor(PostService: IPostService, PostLikeService: IPostLikeService) {
     this.postService = PostService;
+    this.postLikeService = PostLikeService;
   }
   /**
    * Display a listing of the resource.
@@ -88,17 +93,19 @@ class PostController {
   /**
    * Like the specified resource in storage.
    * @method GET
-   * @endpoint api/post/like/:post_id
+   * @endpoint api/post/like
    * @param Request
    * @return Response
    */
   like = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      let validate = await req.validate(req.params, { post_id: "required|numeric" });
-      if (!validate.success) return HttpResponse.BAD_REQUEST(res, { data: validate.data, status: false });
+      let validate = await postLikeValidation.validate<postLikeType>(req.body);
+      if (!validate.success) return HttpResponse.BAD_REQUEST(res, { message: validate.message, data: validate.data, status: false });
 
-      return await this.postService
-        .likePost(Number(validate.data["post_id"]))
+      let like = new CreatePostLikeRequestDTO(validate.data);
+
+      return await this.postLikeService
+        .likePost(like)
         .then((data) => {
           return HttpResponse.OK(res, { data, status: true });
         })

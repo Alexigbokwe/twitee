@@ -4,6 +4,7 @@ import DOCUMENTATION from "Elucidate/Documentation/DocumentationServiceProvider"
 import routeDocumentation from "Resources/RouteDocumentation";
 import PostService from "App/Service/PostService";
 import CommentService from "App/Service/CommentService";
+import PostLikeService from "App/Service/PostLikeService";
 
 class AppServiceProvicer extends ServiceProvider {
   /**
@@ -14,6 +15,7 @@ class AppServiceProvicer extends ServiceProvider {
     this.app.singleton("Authenticator", Authenticator, "class");
     this.app.singleton("PostService", PostService, "class");
     this.app.singleton("CommentService", CommentService, "class");
+    this.app.singleton("PostLikeService", PostLikeService, "class");
   }
 
   /**

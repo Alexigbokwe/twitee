@@ -15,7 +15,7 @@ Route.group({ prefix: "post", middleware: ["auth"] }, () => {
 
   Route.post("/save", "PostController@store");
 
-  Route.get("/like/:post_id", "PostController@like");
+  Route.post("/like", "PostController@like");
 
   Route.delete("/delete/:post_id", "PostController@destroy");
 });

@@ -8,8 +8,8 @@ class CommentRepository extends SQLPD_repository {
 
   async findByIdWithAuthor(comment_id: number): Promise<object> {
     try {
-      let post = await Comment.query().findById(comment_id).withGraphFetched("author");
-      return Promise.resolve(post);
+      let comment = await Comment.query().findById(comment_id).withGraphFetched("author");
+      return Promise.resolve(comment);
     } catch (error) {
       return Promise.reject(error);
     }

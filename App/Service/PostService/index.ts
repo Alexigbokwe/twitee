@@ -2,9 +2,10 @@ import CreatePostRequestDTO from "App/DTO/Post/CreatePostRequestDTO";
 import CreatePostResponseDTO from "App/DTO/Post/CreatePostResponseDTO";
 import IPost from "App/DTO/Post/IPost";
 import PostRepository from "App/Repository/PostRespository";
+import IPostExistence from "./IPostExistence";
 import IPostService from "./IPostService";
 
-class PostService implements IPostService {
+class PostService implements IPostService, IPostExistence {
   async getAllPosts(): Promise<CreatePostResponseDTO[]> {
     try {
       const posts = <IPost[]>await new PostRepository().getAllWithAuthors();
@@ -83,7 +84,7 @@ class PostService implements IPostService {
     }
   }
 
-  private async doesPostExist(post_id: number): Promise<boolean> {
+  async doesPostExist(post_id: number): Promise<boolean> {
     try {
       const check = <IPost>await new PostRepository().findById(post_id);
       return check.id ? Promise.resolve(true) : Promise.reject(false);

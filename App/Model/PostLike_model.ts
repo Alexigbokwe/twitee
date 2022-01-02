@@ -7,6 +7,17 @@ class Postlike extends Model implements IPostLike {
   liked_by!: number;
   // Table name
   static tableName = "post_likes";
+
+  static relationMappings() {
+    return {
+      author: this.belongsTo("App/Model/User_model", {
+        foreign_key: "liked_by",
+        filter: (query) => {
+          query.select("id", "username");
+        },
+      }),
+    };
+  }
 }
 
 export default Postlike;
