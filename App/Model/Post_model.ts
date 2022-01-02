@@ -5,7 +5,6 @@ class Post extends Model implements IPost {
   id!: number;
   posted_by!: number;
   post_content!: string;
-  likes!: number;
   // Table name
   static tableName = "posts";
 

@@ -11,7 +11,6 @@ exports.up = function (migration: Migration) {
     table.increments("id").primary();
     table.integer("posted_by").unsigned().references("id").inTable("users");
     table.text("post_content").notNullable();
-    table.integer("likes").defaultTo(0);
     table.timestamps(true, true);
   });
 };
