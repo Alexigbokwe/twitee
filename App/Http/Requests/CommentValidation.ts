@@ -1,7 +1,7 @@
 "use strict";
 import FormRequest from "Elucidate/Validator/FormRequest";
 
-type commentType = { comment_author: number; comment: string };
+type commentType = { post_id: number; comment_author: number; comment: string };
 
 class CommentValidation extends FormRequest {
   /**
@@ -10,6 +10,7 @@ class CommentValidation extends FormRequest {
    */
   async validate<T>(data: T) {
     return await FormRequest.make<T>(data, {
+      post_id: "required|numeric",
       comment_author: "required|numeric",
       comment: "required|string|min:2",
     });

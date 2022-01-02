@@ -44,7 +44,7 @@ class PostController {
   store = async (req: Request, res: Response, next: NextFunction) => {
     try {
       let validate = await postValidation.validate<postType>(req.body);
-      if (!validate.success) return HttpResponse.BAD_REQUEST(res, { data: validate.data, status: false });
+      if (!validate.success) return HttpResponse.BAD_REQUEST(res, { message: validate.message, data: validate.data, status: false });
 
       let post = new CreatePostRequestDTO(validate.data);
       return await this.postService
@@ -70,7 +70,7 @@ class PostController {
   show = async (req: Request, res: Response, next: NextFunction) => {
     try {
       let validate = await req.validate(req.params, { post_id: "required|numeric" });
-      if (!validate.success) return HttpResponse.BAD_REQUEST(res, { data: validate.data, status: false });
+      if (!validate.success) return HttpResponse.BAD_REQUEST(res, { message: validate.message, data: validate.data, status: false });
 
       return await this.postService
         .getPost(Number(validate.data["post_id"]))

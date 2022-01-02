@@ -7,6 +7,7 @@ class CommentService implements ICommentService {
   async createComment(comment: CreateCommentRequestDTO): Promise<CreateCommentResponseDTO> {
     try {
       const commentObject = {
+        post_id: comment.$post_id,
         commented_by: comment.$commented_by,
         comment_content: comment.$comment_content,
       };

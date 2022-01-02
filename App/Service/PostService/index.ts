@@ -20,11 +20,11 @@ class PostService implements IPostService {
   async getPost(post_id: number): Promise<CreatePostResponseDTO> {
     try {
       return await this.doesPostExist(post_id)
-        .then(async () => {
+        .then(async (x) => {
           const post = <IPost>await new PostRepository().findByIdWithAuthor(post_id);
           return Promise.resolve(new CreatePostResponseDTO(post));
         })
-        .catch(() => {
+        .catch((y) => {
           return Promise.reject("Post does not exist");
         });
     } catch (error) {
@@ -83,10 +83,7 @@ class PostService implements IPostService {
   private async doesPostExist(post_id: number): Promise<boolean> {
     try {
       const check = <IPost>await new PostRepository().findById(post_id);
-      if (check.id) {
-        return Promise.resolve(true);
-      }
-      return Promise.reject(false);
+      return check.id ? Promise.resolve(true) : Promise.reject(false);
     } catch (error) {
       return Promise.reject(false);
     }

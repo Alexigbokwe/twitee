@@ -9,6 +9,7 @@ let tableName = "comments";
 exports.up = function (migration: Migration) {
   return migration.schema.createTable(tableName, (table) => {
     table.increments("id");
+    table.integer("post_id").unsigned().references("id").inTable("posts");
     table.integer("commented_by").unsigned().references("id").inTable("users");
     table.text("comment_content").notNullable();
     table.timestamps(true, true);

@@ -8,7 +8,7 @@ class PostRepository extends SQLPD_repository {
 
   async getAllWithAuthors(): Promise<object[]> {
     try {
-      let posts = await Post.query().withGraphFetched("author");
+      let posts = await Post.query().withGraphFetched("author").withGraphFetched("comment");
       return Promise.resolve(posts);
     } catch (error) {
       return Promise.reject(error);
@@ -17,7 +17,7 @@ class PostRepository extends SQLPD_repository {
 
   async findByIdWithAuthor(post_id: number): Promise<object> {
     try {
-      let post = await Post.query().findById(post_id).withGraphFetched("author");
+      let post = await Post.query().findById(post_id).withGraphFetched("author").withGraphFetched("comment");
       return Promise.resolve(post);
     } catch (error) {
       return Promise.reject(error);
