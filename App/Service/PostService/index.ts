@@ -20,11 +20,11 @@ class PostService implements IPostService {
   async getPost(post_id: number): Promise<CreatePostResponseDTO> {
     try {
       return await this.doesPostExist(post_id)
-        .then(async (x) => {
+        .then(async () => {
           const post = <IPost>await new PostRepository().findByIdWithAuthor(post_id);
           return Promise.resolve(new CreatePostResponseDTO(post));
         })
-        .catch((y) => {
+        .catch(() => {
           return Promise.reject("Post does not exist");
         });
     } catch (error) {
@@ -67,12 +67,15 @@ class PostService implements IPostService {
         .then(async () => {
           const post = <IPost>await new PostRepository().findById(post_id);
           if (post.posted_by != author_id) {
-            return Promise.reject("Sorry, you don't permission to delete this post");
+            return Promise.reject({ type: "permission", message: "Sorry, you don't permission to delete this post" });
           }
           await new PostRepository().deleteWhere({ id: post_id, posted_by: author_id });
           return Promise.resolve("Post Successfully removed from system");
         })
-        .catch(() => {
+        .catch((error) => {
+          if (error["type"] == "permission") {
+            return Promise.reject(error["message"]);
+          }
           return Promise.reject("Post does not exist");
         });
     } catch (error) {

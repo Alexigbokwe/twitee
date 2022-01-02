@@ -88,7 +88,7 @@ class PostController {
   /**
    * Like the specified resource in storage.
    * @method GET
-   * @endpoint api/post/like
+   * @endpoint api/post/like/:post_id
    * @param Request
    * @return Response
    */
